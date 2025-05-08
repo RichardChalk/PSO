@@ -10,6 +10,8 @@ namespace ConsoleReadAPI
         {
             // Denna Console App anropar en web API som finns lokalt i samma solution!
             Console.WriteLine("Anropar Web API...");
+            
+            // URL till vår lokal API endpoint
             string apiUrl = "https://localhost:7096/api/SuperHero";
 
             using (HttpClient client = new HttpClient())
@@ -23,7 +25,7 @@ namespace ConsoleReadAPI
                     response.EnsureSuccessStatusCode();
 
                     string responseData = await response.Content.ReadAsStringAsync();
-                    var superheroes = JsonConvert.DeserializeObject <List<SuperHero>>(responseData);
+                    var superheroes = JsonConvert.DeserializeObject<List<SuperHero>>(responseData);
 
                     Console.WriteLine("Svar från API:");
                     Console.WriteLine("==============");
@@ -31,7 +33,7 @@ namespace ConsoleReadAPI
                     {
                         Console.WriteLine($"{superhero.Id}: {superhero.Name}");
                     }
-                    
+
                 }
                 catch (HttpRequestException ex)
                 {
